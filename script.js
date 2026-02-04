@@ -5,25 +5,23 @@ const container = document.createElement("div");
 container.className = "container";
 body.appendChild(container);
 
-// heading (must exist immediately)
+// heading
 const heading = document.createElement("h1");
 heading.innerText = "Tic Tac Toe";
-heading.style.display = "none";
 container.appendChild(heading);
 
 // message
 const message = document.createElement("div");
 message.className = "message";
-message.style.display = "none";
 container.appendChild(message);
 
-// inputs
+// inputs (FIXED IDS)
 const input1 = document.createElement("input");
-input1.id = "player-1";
+input1.id = "player1";
 input1.placeholder = "Player 1 name";
 
 const input2 = document.createElement("input");
-input2.id = "player-2";
+input2.id = "player2";
 input2.placeholder = "Player 2 name";
 
 const submitBtn = document.createElement("button");
@@ -35,10 +33,9 @@ container.append(input1, input2, submitBtn);
 // board
 const board = document.createElement("div");
 board.className = "board";
-board.style.display = "none";
 container.appendChild(board);
 
-// create cells immediately (IMPORTANT)
+// create cells
 const cells = [];
 for (let i = 1; i <= 9; i++) {
     const cell = document.createElement("div");
@@ -51,22 +48,17 @@ for (let i = 1; i <= 9; i++) {
 // game state
 let currentPlayer;
 let players;
-let gameActive;
+let gameActive = false;
 
 // submit logic
 submitBtn.addEventListener("click", () => {
     if (!input1.value || !input2.value) return;
 
-    players = { X: input1.value, O: input2.value };
-    currentPlayer = "X";
+    players = { x: input1.value, o: input2.value };
+    currentPlayer = "x";
     gameActive = true;
 
-    heading.style.display = "block";
-    message.style.display = "block";
-    board.style.display = "grid";
-
     message.innerText = `${players[currentPlayer]}, you're up`;
-
     cells.forEach(cell => cell.innerText = "");
 });
 
@@ -83,7 +75,7 @@ cells.forEach(cell => {
             return;
         }
 
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        currentPlayer = currentPlayer === "x" ? "o" : "x";
         message.innerText = `${players[currentPlayer]}, you're up`;
     });
 });
